@@ -13,3 +13,7 @@ variable "region" {
 variable "UNIQUE_ANIMAL_IDENTIFIER" {
   default = "spider"
 }
+
+variable "ARTIFACT" {
+  default = "sg-november-artifact-bucket"
+}
