@@ -11,8 +11,5 @@ variable "region" {
 }
 
 variable "UNIQUE_ANIMAL_IDENTIFIER" {
-  default = "playground"
-}
-variable "ARTIFACT" {
-  
+  default = "spider"
 }
