@@ -27,7 +27,7 @@ pipeline {
             steps {
                 script {
                     sh """
-                    apt-get install zip
+                    sudo apt-get install zip
                     zip -r spider-build-artifacts.zip build/
                     aws s3 cp spider-build-artifacts.zip s3://dpg-november-artifact-bucket
                     cd terraform
