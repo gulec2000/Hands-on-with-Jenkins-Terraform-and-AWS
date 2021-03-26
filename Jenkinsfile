@@ -23,26 +23,15 @@ pipeline {
             }
         }
         stage("Deploy") {
-            environment {
-                ARTIFACT = sh (returnStdout: true, script: 
-                """
-                aws s3api list-buckets --query 'Buckets[].Name' | grep -wo "\\w*playgroundartifact\\w*" | cut -d" " -f2
-                """
-                ).trim()
-                TFSTATE = sh (returnStdout: true, script: 
-                """
-                aws s3api list-buckets --query 'Buckets[].Name' | grep -wo "\\w*playgroundtfstate\\w*" | cut -d" " -f2
-                """
-                ).trim()
-            }
+            
             steps {
                 script {
                     sh """
                     zip -r $UNIQUE_ANIMAL_IDENTIFIER-build-artifacts.zip build/
-                    aws s3 cp $UNIQUE_ANIMAL_IDENTIFIER-build-artifacts.zip s3://${ARTIFACT}
+                    aws s3 cp $UNIQUE_ANIMAL_IDENTIFIER-build-artifacts.zip s3://dpg-november-artifact-bucket
                     cd terraform
-                    terraform init -no-color -backend-config="key=${UNIQUE_ANIMAL_IDENTIFIER}.tfstate"
-                    terraform apply --auto-approve -no-color
+                    terraform init -backend-config="key=${UNIQUE_ANIMAL_IDENTIFIER}.tfstate"
+                    terraform apply --auto-approve
                     """
                 }
             }
