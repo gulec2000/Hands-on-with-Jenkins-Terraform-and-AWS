@@ -27,7 +27,7 @@ pipeline {
                 script {
                     sh """
                     zip -r $UNIQUE_ANIMAL_IDENTIFIER-build-artifacts.zip build/
-                    /usr/local/bin/aws s3Upload (file:"$UNIQUE_ANIMAL_IDENTIFIER-build-artifacts.zip", bucket:"dpg-november-artifact-bucket", path:"s3://dpg-november-artifact-bucket") 
+                    /usr/local/bin/aws s3Upload file:"$UNIQUE_ANIMAL_IDENTIFIER-build-artifacts.zip", bucket:"dpg-november-artifact-bucket", path:"s3://dpg-november-artifact-bucket" 
                     cd terraform
                     terraform init -backend-config="key=${UNIQUE_ANIMAL_IDENTIFIER}.tfstate"
                     terraform apply --auto-approve
