@@ -20,7 +20,6 @@ resource "aws_default_vpc" "default" {
 }
 resource "aws_security_group" "sg" {
   name   = "sg"
-  vpc_id = var.vpc_id
 
   ingress {
     from_port = 80
