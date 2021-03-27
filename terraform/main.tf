@@ -20,6 +20,7 @@ resource "aws_default_vpc" "default" {
 }
 resource "aws_security_group" "sg" {
   name   = "sg"
+  vpc_id = "vpc-7265321a"
 
   ingress {
     from_port = 80
@@ -53,6 +54,7 @@ resource "aws_security_group" "sg" {
 
 resource "aws_subnet" "default" {
   availability_zone = "eu-west-2a"
+  vpc_id            = "vpc-7265321a"
 
   tags = {
     Name = "Default subnet for eu-west-2a"
