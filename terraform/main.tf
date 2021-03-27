@@ -51,18 +51,18 @@ resource "aws_security_group" "sg" {
 
 }
 
-data "aws_security_group" "sg" {
-  id = var.security_group_id
-}
-
-data "aws_default_subnet" "sn" {
-  id = var.aws_subnet_id
-}
-
 resource "aws_default_subnet" "default" {
   availability_zone = "eu-west-2a"
 
   tags = {
     Name = "Default subnet for eu-west-2a"
   }
+}
+
+data "aws_security_group" "sg" {
+  id = var.security_group_id
+}
+
+data "aws_default_subnet" "sn" {
+  id = var.aws_subnet_id
 }
