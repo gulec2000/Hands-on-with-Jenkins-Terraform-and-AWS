@@ -1,5 +1,5 @@
 variable "security_group_id" {
-  default = "sg-c30200a4"
+  default = aws_security_group.sg.security_group_id
 }
 
 variable "subnet_id" {
