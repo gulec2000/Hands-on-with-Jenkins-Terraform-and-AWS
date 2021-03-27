@@ -11,7 +11,7 @@ sudo yum install -y nodejs
 aws configure set default.region eu-west-2
 
 # Copy and unzip build artifacts from s3
-sudo aws s3 cp s3://"${ARTIFACT}"/"${UNIQUE_ANIMAL_IDENTIFIER}"-build-artifacts.zip ./
+sudo aws s3 cp s3://sg-november-artifact-bucket/"${UNIQUE_ANIMAL_IDENTIFIER}"-build-artifacts.zip ./
 sudo unzip "${UNIQUE_ANIMAL_IDENTIFIER}"-build-artifacts.zip
 
 # Deploy application

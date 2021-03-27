@@ -5,5 +5,3 @@ variable "subnet_id" {}
 variable "elb_id" {}
 
 variable "UNIQUE_ANIMAL_IDENTIFIER" {}
-
-variable "ARTIFACT" {}

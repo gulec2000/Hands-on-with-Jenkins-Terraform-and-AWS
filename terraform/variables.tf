@@ -1,9 +1,9 @@
 variable "security_group_id" {
-  default = "sg-0cfa06fed7a4649c7"
+  default = "sg-c30200a4"
 }
 
 variable "subnet_id" {
-  default = "subnet-02db31a87afc4dc31"
+  default = "subnet-874c29fd"
 }
 
 variable "region" {
@@ -12,8 +12,4 @@ variable "region" {
 
 variable "UNIQUE_ANIMAL_IDENTIFIER" {
   default = "spider"
-}
-
-variable "ARTIFACT" {
-  
 }
