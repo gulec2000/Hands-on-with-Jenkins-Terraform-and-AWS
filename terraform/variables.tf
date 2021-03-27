@@ -6,6 +6,10 @@ variable "subnet_id" {
   default = "subnet-874c29fd"
 }
 
+variable "vpc_id" {
+  default = "vpc-7265321a"
+}
+
 variable "region" {
   default = "eu-west-2"
 }
