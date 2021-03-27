@@ -1,13 +1,9 @@
 variable "security_group_id" {
-  default = aws_security_group.sg.security_group_id
+  default = "sg-c30200a4"
 }
 
 variable "subnet_id" {
-  default = "subnet-874c29fd"
-}
-
-variable "vpc_id" {
-  default = "vpc-7265321a"
+  default = "subnet-874c29fd1"
 }
 
 variable "region" {
