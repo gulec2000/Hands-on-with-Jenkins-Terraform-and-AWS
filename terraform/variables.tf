@@ -15,5 +15,5 @@ variable "UNIQUE_ANIMAL_IDENTIFIER" {
 }
 
 variable "ARTIFACT" {
-  default = "sg-november-artifact-bucket"
+  
 }

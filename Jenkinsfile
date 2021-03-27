@@ -23,15 +23,13 @@ pipeline {
             }
         }
         stage("Deploy") {
-            
             steps {
                 script {
                     sh """
-                    sudo apt-get install zip
-                    zip -r spider-build-artifacts.zip build/
-                    aws s3 cp spider-build-artifacts.zip s3://dpg-november-artifact-bucket
+                    zip -r $UNIQUE_ANIMAL_IDENTIFIER-build-artifacts.zip build/
+                    aws s3 cp $UNIQUE_ANIMAL_IDENTIFIER-build-artifacts.zip s3://dpg-november-artifact-bucket
                     cd terraform
-                    terraform init -backend-config="key=spider.tfstate"
+                    terraform init -backend-config="key=${UNIQUE_ANIMAL_IDENTIFIER}.tfstate"
                     terraform apply --auto-approve
                     """
                 }
