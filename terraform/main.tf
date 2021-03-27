@@ -1,14 +1,14 @@
 module "dpg_novmeber_elb" {
   source                   = "./modules/elastic_load_balancer"
   security_group_id        = data.aws_security_group.sg.id
-  subnet_id                = data.aws_default_subnet.sn.id
+  subnet_id                = data.aws_subnet.sn.id
   UNIQUE_ANIMAL_IDENTIFIER = var.UNIQUE_ANIMAL_IDENTIFIER
 }
 
 module "dpg_november_asg" {
   source                   = "./modules/autoscaling_group"
   security_group_id        = data.aws_security_group.sg.id
-  subnet_id                = data.aws_default_subnet.sn.id
+  subnet_id                = data.aws_subnet.sn.id
   elb_id                   = module.dpg_novmeber_elb.elb_id
   UNIQUE_ANIMAL_IDENTIFIER = var.UNIQUE_ANIMAL_IDENTIFIER
 }
@@ -51,7 +51,7 @@ resource "aws_security_group" "sg" {
 
 }
 
-resource "aws_default_subnet" "default" {
+resource "aws_subnet" "default" {
   availability_zone = "eu-west-2a"
 
   tags = {
@@ -63,6 +63,6 @@ data "aws_security_group" "sg" {
   id = var.security_group_id
 }
 
-data "aws_default_subnet" "sn" {
+data "aws_subnet" "sn" {
   id = var.aws_subnet_id
 }
