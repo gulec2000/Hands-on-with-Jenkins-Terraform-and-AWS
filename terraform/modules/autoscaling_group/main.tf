@@ -11,7 +11,7 @@ resource "aws_launch_configuration" "lc" {
   name_prefix                 = "playground-"
   image_id                    = data.aws_ami.amazon-linux-2.id
   instance_type               = "t2.small"
-  security_groups             = [var.security_group_id]
+  security_groups             = aws_security_group.sg.security_group_id
   user_data                   = data.template_file.init.rendered
   key_name                    = "playground-november-key"
   associate_public_ip_address = true
@@ -30,7 +30,7 @@ resource "aws_autoscaling_group" "asg" {
   desired_capacity     = 1
   health_check_type    = "EC2"
   launch_configuration = aws_launch_configuration.lc.name
-  vpc_zone_identifier  = [var.subnet_id]
+  vpc_zone_identifier  = aws_subnet.subnet1.subnet_id
   load_balancers       = [var.elb_id]
 
   lifecycle {
