@@ -19,8 +19,8 @@ resource "aws_default_vpc" "default" {
   }
 }
 resource "aws_security_group" "sg" {
-  name   = "sg"
-  vpc_id = "vpc-7265321a"
+  name        = "sg"
+  vpc_id      = "vpc-7265321a" 
 
   ingress {
     from_port = 80
@@ -52,9 +52,10 @@ resource "aws_security_group" "sg" {
 
 }
 
-resource "aws_subnet" "default" {
+resource "aws_subnet" "sn" {
   availability_zone = "eu-west-2a"
   vpc_id            = "vpc-7265321a"
+  cidr_block        = "172.31.16.0/20"
 
   tags = {
     Name = "Default subnet for eu-west-2a"
@@ -66,5 +67,5 @@ data "aws_security_group" "sg" {
 }
 
 data "aws_subnet" "sn" {
-  id = var.aws_subnet_id
+  id = var.subnet_id
 }
