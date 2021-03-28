@@ -78,7 +78,7 @@ resource "aws_route_table_association" "route-subnet1" {
 }
 
 data "aws_security_group" "sg" {
-  id = aws_security_group.sg.security_group_id
+  vpc_id = data.aws_vpc.vpc1.id
   tags = {
     "Purpose" = "Playground"
   }
@@ -91,7 +91,6 @@ data "aws_subnet" "subnet1" {
   }
 }
 data "aws_vpc" "vpc1" {
-  id = aws_vpc.vpc1.vpc_id
   tags = {
     Purpose = "Playground"
   }
