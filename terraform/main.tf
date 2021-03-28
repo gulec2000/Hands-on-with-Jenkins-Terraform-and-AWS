@@ -1,10 +1,14 @@
 module "dpg_novmeber_elb" {
   source                   = "./modules/elastic_load_balancer"
+  subnet_id                = data.aws_subnet.subnet1.id
+  security_group_id        = data.aws_security_group.sg.id 
   UNIQUE_ANIMAL_IDENTIFIER = var.UNIQUE_ANIMAL_IDENTIFIER
 }
 
 module "dpg_november_asg" {
   source                   = "./modules/autoscaling_group"
+  subnet_id                = data.aws_subnet.subnet1.id
+  security_group_id        = data.aws_security_group.sg.id
   elb_id                   = module.dpg_novmeber_elb.elb_id
   UNIQUE_ANIMAL_IDENTIFIER = var.UNIQUE_ANIMAL_IDENTIFIER
 }
@@ -48,6 +52,7 @@ resource "aws_vpc" "vpc1" {
 
   private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
   public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+}
 
 resource "aws_subnet" "subnet1" {
   availability_zone       = "eu-west-2a"
@@ -55,7 +60,6 @@ resource "aws_subnet" "subnet1" {
   cidr_block              = "10.0.101.0/24"
   map_public_ip_on_launch = "true"
 
-}
 }
 
 # INTERNET_GATEWAY
@@ -65,7 +69,7 @@ resource "aws_internet_gateway" "gateway1" {
 
 # ROUTE_TABLE
 resource "aws_route_table" "route_table1" {
-  vpc_id = aws_vpc.vpc1.id
+  vpc_id = data.aws_vpc.vpc1.id
 
   route {
     cidr_block = "0.0.0.0/0"
@@ -76,4 +80,22 @@ resource "aws_route_table" "route_table1" {
 resource "aws_route_table_association" "route-subnet1" {
   subnet_id = aws_subnet.subnet1.id
   route_table_id = aws_route_table.route_table1.id
+}
+
+data "aws_security_group" "sg" {
+  tags = {
+    "Purpose" = "Playground"
+  }
+}
+data "aws_subnet" "subnet1" {
+  vpc_id = data.aws_vpc.vpc1.id
+  tags = {
+    Purpose = "Playground"
+    count = 0
+  }
+}
+data "aws_vpc" "vpc1" {
+  tags = {
+    Purpose = "Playground"
+  }
 }

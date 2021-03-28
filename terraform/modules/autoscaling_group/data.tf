@@ -13,3 +13,21 @@ data "aws_ami" "amazon-linux-2" {
 
   owners = ["amazon"]
 }
+
+data "aws_security_group" "sg" {
+  tags = {
+    "Purpose" = "Playground"
+  }
+}
+data "aws_subnet" "subnet1" {
+  vpc_id = data.aws_vpc.vpc1.id
+  tags = {
+    Purpose = "Playground"
+    count = 0
+  }
+}
+data "aws_vpc" "vpc1" {
+  tags = {
+    Purpose = "Playground"
+  }
+}
