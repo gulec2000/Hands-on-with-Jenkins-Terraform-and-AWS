@@ -1,7 +1,5 @@
 module "dpg_novmeber_elb" {
-  source                   = "./modules/elastic_load_balancer"
-  subnet_id                = data.aws_subnet.subnet1.id
-  security_group_id        = data.aws_security_group.sg.id 
+  source                   = "./modules/elastic_load_balancer" 
   UNIQUE_ANIMAL_IDENTIFIER = var.UNIQUE_ANIMAL_IDENTIFIER
 }
 
