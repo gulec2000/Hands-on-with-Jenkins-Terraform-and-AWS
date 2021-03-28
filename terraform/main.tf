@@ -60,6 +60,7 @@ resource "aws_subnet" "subnet1" {
   map_public_ip_on_launch = "true"
 
 }
+}
 
 # INTERNET_GATEWAY
 resource "aws_internet_gateway" "gateway1" {
