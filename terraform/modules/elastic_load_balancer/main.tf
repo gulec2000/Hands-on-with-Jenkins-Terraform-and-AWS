@@ -1,8 +1,8 @@
 # Create the ELB
 resource "aws_elb" "elb" {
   name            = "playground-${var.UNIQUE_ANIMAL_IDENTIFIER}"
-  security_groups = aws_security_group.sg.security_group_id
-  subnets         = aws_subnet.subnet1.subnet_id
+  security_groups = data.aws_security_group.sg.id
+  subnets         = data.aws_subnet.subnet1.id
 
   listener {
     instance_port     = 80
@@ -25,5 +25,23 @@ resource "aws_elb" "elb" {
 
   tags = {
     Name = "playground-${var.UNIQUE_ANIMAL_IDENTIFIER}"
+  }
+}
+
+data "aws_security_group" "sg" {
+  tags = {
+    "Purpose" = "Playground"
+  }
+}
+data "aws_subnet" "subnet1" {
+  vpc_id = data.aws_vpc.vpc1.id
+  tags = {
+    Purpose = "Playground"
+    count = 0
+  }
+}
+data "aws_vpc" "vpc1" {
+  tags = {
+    Purpose = "Playground"
   }
 }
