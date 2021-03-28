@@ -30,7 +30,7 @@ resource "aws_autoscaling_group" "asg" {
   desired_capacity     = 1
   health_check_type    = "EC2"
   launch_configuration = aws_launch_configuration.lc.name
-  vpc_zone_identifier  = aws_subnet.subnet1.subnet_id
+  vpc_zone_identifier  = var.subnet_id
   load_balancers       = [var.elb_id]
 
   lifecycle {
